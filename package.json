@@ -1,0 +1,10 @@
+{
+  "name": "chatbot-kimi",
+  "version": "1.0.0",
+  "description": "Chat sencillo con Kimi API",
+  "main": "chat.js",
+  "scripts": {
+    "start": "node chat.js"
+  },
+  "dependencies": {}
+}
