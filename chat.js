@@ -1,41 +1,47 @@
 require('dotenv').config();
 const readline = require('readline');
 const https = require('https');
+const fs = require('fs');
 
-const API_KEY = process.env.GEMINI_API_KEY;
-const API_URL = 'generativelanguage.googleapis.com';
-const MODEL = 'gemini-2.5-flash';
+const BANCO = fs.readFileSync('banco_conocimiento.txt', 'utf8');
+
+const API_KEY = process.env.OPENROUTER_API_KEY;
+const API_URL = 'openrouter.ai';
+const MODEL = process.env.OPENROUTER_MODEL || 'moonshotai/kimi-k2.6:free';
 const MAX_RETRIES = 3;
+
+const SYSTEM_PROMPT = `Eres un asistente amigable y util que trabaja para la Municipalidad Provincial de Puno. Usa la siguiente informacion institucional para responder de forma breve y clara. Si no sabes algo, di que no tienes esa informacion.\n\n--- BANCO DE CONOCIMIENTO ---\n${BANCO}`;
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-const contents = [];
+// Historial en formato OpenAI
+const messages = [{ role: 'system', content: SYSTEM_PROMPT }];
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function callGemini(userMessage, attempt = 1) {
+function callKimi(userMessage, attempt = 1) {
   return new Promise((resolve, reject) => {
-    contents.push({ role: 'user', parts: [{ text: userMessage }] });
+    messages.push({ role: 'user', content: userMessage });
 
     const data = JSON.stringify({
-      systemInstruction: {
-        role: 'user',
-        parts: [{ text: 'Eres un asistente amigable y util. Responde de forma breve y clara.' }]
-      },
-      contents: contents
+      model: MODEL,
+      messages: messages
     });
 
     const options = {
       hostname: API_URL,
-      path: `/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`,
+      path: '/api/v1/chat/completions',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`,
+        'HTTP-Referer': 'http://localhost',
+        'X-Title': 'Chatbot MPP',
         'Content-Length': Buffer.byteLength(data)
       }
     };
@@ -47,33 +53,36 @@ function callGemini(userMessage, attempt = 1) {
         try {
           const json = JSON.parse(body);
           if (json.error) {
-            const status = json.error.code;
+            const status = json.error.status || json.error.code || res.statusCode;
             const isRetryable = status === 429 || status === 502 || status === 503;
+            const errorMessage = json.error.message || JSON.stringify(json.error);
             if (isRetryable && attempt < MAX_RETRIES) {
               const delay = attempt * 2000;
-              console.log(`\n[Reintentando en ${delay / 1000}s... intento ${attempt + 1}/${MAX_RETRIES}]`);
+              console.log(`\n[OpenRouter ${status}: ${errorMessage}]`);
+              console.log(`[Reintentando en ${delay / 1000}s... intento ${attempt + 1}/${MAX_RETRIES}]`);
               await sleep(delay);
-              contents.pop(); // quitar el user message que acabamos de agregar
-              resolve(await callGemini(userMessage, attempt + 1));
+              messages.pop();
+              resolve(await callKimi(userMessage, attempt + 1));
               return;
             }
-            reject(new Error(json.error.message));
+            reject(new Error(`OpenRouter ${status}: ${errorMessage}`));
             return;
           }
-          const reply = json.candidates[0].content.parts[0].text;
-          contents.push({ role: 'model', parts: [{ text: reply }] });
+          const reply = json.choices[0].message.content;
+          messages.push({ role: 'assistant', content: reply });
           resolve(reply);
         } catch (err) {
           const isHtml = body.startsWith('<!DOCTYPE');
           if (isHtml && attempt < MAX_RETRIES) {
             const delay = attempt * 2000;
-            console.log(`\n[Error del servidor, reintentando en ${delay / 1000}s...]`);
+            console.log(`\n[OpenRouter devolvio HTML con status ${res.statusCode}]`);
+            console.log(`[Reintentando en ${delay / 1000}s...]`);
             await sleep(delay);
-            contents.pop();
-            resolve(await callGemini(userMessage, attempt + 1));
+            messages.pop();
+            resolve(await callKimi(userMessage, attempt + 1));
             return;
           }
-          reject(new Error('Error del servidor. Intenta de nuevo en unos segundos.'));
+          reject(new Error(`Respuesta invalida de OpenRouter (${res.statusCode}): ${body.substring(0, 300)}`));
         }
       });
     });
@@ -83,8 +92,8 @@ function callGemini(userMessage, attempt = 1) {
         const delay = attempt * 2000;
         console.log(`\n[Error de red, reintentando en ${delay / 1000}s...]`);
         await sleep(delay);
-        contents.pop();
-        resolve(await callGemini(userMessage, attempt + 1));
+        messages.pop();
+        resolve(await callKimi(userMessage, attempt + 1));
         return;
       }
       reject(err);
@@ -105,8 +114,8 @@ function prompt() {
     }
 
     try {
-      process.stdout.write('\nGemini: ');
-      const reply = await callGemini(text);
+      process.stdout.write('\nKimi: ');
+      const reply = await callKimi(text);
       console.log(reply);
     } catch (err) {
       console.log('\nError:', err.message);
@@ -116,7 +125,7 @@ function prompt() {
   });
 }
 
-console.log('=== Chat con Gemini ===');
+console.log('=== Chat con Kimi (OpenRouter) ===');
 console.log('Escribe tu mensaje y presiona Enter.');
 console.log('Escribe "salir" para terminar.\n');
 prompt();

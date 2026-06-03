@@ -1,0 +1,209 @@
+Banco de Información Estratégica – Municipalidad Provincial de Puno (MPP)
+Datos institucionales clave
+Municipalidad Provincial de Puno
+
+Municipalidad Provincial de Puno
+
+Dirección: Jr. Deustua 458, Plaza de Armas, Puno.
+
+Central telefónica: 051-601000
+
+Portal institucional:
+Portal Municipal de Puno
+
+Portal del Estado:
+Ficha Oficial MPP en Gob.pe
+
+Oficina de Tecnología Informática (OTI)
+Contacto identificado
+
+OTI
+Anexo: 4010
+
+Correo institucional identificado:
+
+amendizabal@munipuno.gob.pe
+
+Sistemas que normalmente maneja la OTI
+Portal web institucional.
+Mesa de partes digital.
+Correos institucionales.
+Infraestructura de red.
+Cámaras IP.
+Servidores.
+Respaldos.
+Soporte técnico.
+Seguridad informática.
+Bases de datos.
+Sistemas tributarios.
+Integraciones entre gerencias.
+Áreas con mayor presupuesto tecnológico
+Gerencia de Administración Tributaria
+
+Necesidades frecuentes:
+
+Predial.
+Arbitrios.
+Fiscalización.
+Cobranza.
+Gerencia de Desarrollo Urbano
+
+Necesidades frecuentes:
+
+Catastro.
+GIS.
+Licencias.
+Expedientes digitales.
+Gerencia de Ingeniería Municipal
+
+Necesidades frecuentes:
+
+Obras públicas.
+Valorizaciones.
+Supervisión.
+Seguimiento de proyectos.
+Gerencia de Transporte
+
+Necesidades frecuentes:
+
+Fiscalización.
+Licencias.
+Rutas.
+GPS.
+Documentos que debes descargar y guardar
+ROF (Reglamento de Organización y Funciones)
+
+Explica:
+
+Todas las gerencias.
+Cargos.
+Funciones.
+Dependencias.
+
+Portal de Transparencia MPP
+
+MOF
+
+Contiene:
+
+Perfil de cada cargo.
+Requisitos.
+Competencias.
+CAP Provisional
+
+Contiene:
+
+Todas las plazas.
+Cargos existentes.
+Cantidad de personal.
+PAP
+
+Contiene:
+
+Presupuesto de personal.
+Remuneraciones.
+POI
+
+Contiene:
+
+Metas anuales.
+Actividades.
+Indicadores.
+PEI
+
+Contiene:
+
+Objetivos estratégicos.
+Proyectos institucionales.
+Información que suele ser útil para vender software
+Lo que normalmente les duele
+Mucho Excel.
+Procesos manuales.
+Expedientes físicos.
+Falta de integración entre áreas.
+Reportes lentos.
+Seguimiento de obras deficiente.
+Información duplicada.
+Posibles proyectos tecnológicos
+Nivel bajo (S/ 5,000 – 15,000)
+Mesa de ayuda.
+Inventario.
+Control vehicular.
+Nivel medio (S/ 15,000 – 50,000)
+Trámite documentario.
+Intranet.
+Gestión de expedientes.
+Nivel alto (S/ 50,000 – 300,000)
+Catastro digital.
+Plataforma tributaria.
+Smart City.
+GIS provincial.
+Fuentes de contratación
+SEACE
+
+Aquí aparecen todas las compras de software.
+
+SEACE OSCE
+
+Buscar:
+
+Municipalidad Provincial de Puno
+Software
+Sistema
+Informático
+Desarrollo
+Licencias
+Presupuesto real
+Consulta Amigable MEF
+
+Aquí puedes ver:
+
+Presupuesto total.
+Inversiones.
+Proyectos.
+Ejecución presupuestal.
+
+Consulta Amigable MEF
+
+Datos poco conocidos
+Dominio institucional
+
+munipuno.gob.pe
+
+Correos institucionales
+
+Formato frecuente:
+
+nombre@munipuno.gob.pe
+
+Portal de Transparencia
+
+Muchos documentos internos terminan publicados en PDF.
+
+Buscar en Google:
+
+site:munipuno.gob.pe filetype:pdf
+Búsquedas útiles
+site:munipuno.gob.pe ROF
+site:munipuno.gob.pe MOF
+site:munipuno.gob.pe CAP
+site:munipuno.gob.pe PAP
+site:munipuno.gob.pe POI
+site:munipuno.gob.pe PEI
+site:munipuno.gob.pe TDR software
+site:munipuno.gob.pe tecnologia informatica
+site:munipuno.gob.pe sistemas informaticos
+Oro puro para propuestas
+
+Antes de presentar cualquier sistema, revisa:
+
+ROF → quién decide.
+CAP → quién ocupa el cargo.
+POI → qué metas tienen.
+PIA/PIM → cuánto dinero tienen.
+SEACE → qué software compraron antes.
+OTI → quién evalúa técnicamente.
+Gerencia Municipal → quién aprueba operativamente.
+Alcaldía → quién da el visto bueno político.
+
+Con esos 8 documentos puedes entender casi toda la estructura de decisión y compra tecnológica de la Municipalidad Provincial de Puno.
